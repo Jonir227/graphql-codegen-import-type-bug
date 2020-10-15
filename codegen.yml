@@ -1,0 +1,21 @@
+overwrite: true
+schema: "src/schema/**/*.type.gql"
+documents: "src/schema/**/*.document.gql"
+config:
+  typesPrefix: T
+  enumPrefix: false
+  namingConvention:
+    enumValues: keep
+generates:
+  src/generated/type.ts:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+  src/generated/resolver.ts:
+    preset: "import-types"
+    presetConfig:
+      typesPath: "generated/type"
+    plugins:
+      - "typescript-resolvers"
+    config:
+      useIndexSignature: true
